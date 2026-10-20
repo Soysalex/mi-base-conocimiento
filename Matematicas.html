@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemáticas - Base de Conocimiento</title>
+    
+    <!-- Script para el manejo del cambio de temas -->
+    <script>
+        function cambiarTema(tema) {
+            document.documentElement.classList.remove('theme-fallout', 'theme-cyberpunk');
+            if (tema !== 'default') {
+                document.documentElement.classList.add('theme-' + tema);
+            }
+            localStorage.setItem('user-theme', tema);
+        }
+        
+        (function() {
+            const temaGuardado = localStorage.getItem('user-theme') || 'default';
+            if (temaGuardado !== 'default') {
+                document.documentElement.classList.add('theme-' + temaGuardado);
+            }
+            window.addEventListener('DOMContentLoaded', () => {
+                const selector = document.getElementById('theme-selector');
+                if (selector) selector.value = temaGuardado;
+            });
+        })();
+    </script>
+
+    <style>
+        /* Variables y Configuración Global (Base + Temas) */
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #141414;
+            --text-primary: #ededed;
+            --text-secondary: #a1a1a1;
+            --border-color: #262626;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --accent-hover: #404040;
+        }
+
+        html.theme-fallout {
+            --bg-color: #050f05;
+            --card-bg: #0c1c0c;
+            --text-primary: #33ff33;
+            --text-secondary: #1ea746;
+            --border-color: #1b4d1b;
+            --accent-hover: #22c55e;
+        }
+
+        html.theme-cyberpunk {
+            --bg-color: #080314;
+            --card-bg: #14082c;
+            --text-primary: #00f0ff;
+            --text-secondary: #c77dff;
+            --border-color: #ff007f;
+            --accent-hover: #ff007f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Contenedor principal */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Cabecera */
+        .site-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .logo a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .logo a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Selector de temas personalizado */
+        .select-custom {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        /* Contenido Principal */
+        .main-content {
+            flex: 1;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* Cuadrícula de Opciones */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .action {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Pie de página */
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabecera -->
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Knowledge Base</a> / Matemáticas</h1>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="#ramas">Ramas</a>
+
+                <!-- Selector de Temas -->
+                <select id="theme-selector" onchange="cambiarTema(this.value)" class="select-custom">
+                    <option value="default">✨ Base (Actual)</option>
+                    <option value="fallout">🟢 Fallout</option>
+                    <option value="cyberpunk">🟣 Cyberpunk</option>
+                </select>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content container">
+        <section class="hero">
+            <h2>Área de Matemáticas</h2>
+            <p>Selecciona la rama que deseas explorar y consultar dentro de tu repositorio.</p>
+        </section>
+
+        <!-- Cuadrícula de Elección: Álgebra o Cálculo -->
+        <section id="ramas" class="knowledge-grid">
+            <a href="algebra.html" class="card-link">
+                <article class="card">
+                    <span class="tag">Álgebra</span>
+                    <h3>Estructuras y Ecuaciones</h3>
+                    <p>Estudio de estructuras algebraicas, polinomios, matrices y resolución de sistemas de ecuaciones.</p>
+                    <span class="action">Explorar rama &rarr;</span>
+                </article>
+            </a>
+
+            <a href="calculo.html" class="card-link">
+                <article class="card">
+                    <span class="tag">Cálculo</span>
+                    <h3>Límites, Derivadas e Integrales</h3>
+                    <p>Análisis matemático del cambio continuo, tasas de variación, optimización y cálculo integral.</p>
+                    <span class="action">Explorar rama &rarr;</span>
+                </article>
+            </a>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 - Mi Base de Conocimiento</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML - Base de Conocimiento</title>
+    <script>
+        function cambiarTema(tema) {
+            document.documentElement.classList.remove('theme-fallout', 'theme-cyberpunk');
+            if (tema !== 'default') {
+                document.documentElement.classList.add('theme-' + tema);
+            }
+            localStorage.setItem('user-theme', tema);
+        }
+        function navegarACategoria(idSeccion) {
+            if (!idSeccion) return;
+            const elemento = document.getElementById(idSeccion);
+            if (elemento) {
+                elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        (function() {
+            const temaGuardado = localStorage.getItem('user-theme') || 'default';
+            if (temaGuardado !== 'default') {
+                document.documentElement.classList.add('theme-' + temaGuardado);
+            }
+            window.addEventListener('DOMContentLoaded', () => {
+                const selector = document.getElementById('theme-selector');
+                if (selector) selector.value = temaGuardado;
+            });
+        })();
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #121212;
+            --text-primary: #ededed;
+            --text-secondary: #a1a1a1;
+            --border-color: #222222;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --accent-code: #3b82f6;
+            --accent-code-bg: rgba(59, 130, 246, 0.08);
+        }
+        html.theme-fallout {
+            --bg-color: #050f05;
+            --card-bg: #0c1c0c;
+            --text-primary: #33ff33;
+            --text-secondary: #1ea746;
+            --border-color: #1b4d1b;
+            --accent-code: #10b981;
+            --accent-code-bg: rgba(16, 185, 129, 0.08);
+        }
+        html.theme-cyberpunk {
+            --bg-color: #080314;
+            --card-bg: #14082c;
+            --text-primary: #00f0ff;
+            --text-secondary: #c77dff;
+            --border-color: #ff007f;
+            --accent-code: #ff007f;
+            --accent-code-bg: rgba(255, 0, 127, 0.08);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .site-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+            background-color: rgba(10, 10, 10, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .logo a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .logo a:hover {
+            color: var(--text-primary);
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        .main-content {
+            flex: 1;
+            padding-top: 3.5rem;
+            padding-bottom: 5rem;
+        }
+        .hero {
+            margin-bottom: 3rem;
+        }
+        .hero h2 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.6rem;
+        }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+        .intro-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .intro-box h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+        }
+        .intro-box p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+        .content-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+        .content-block {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            scroll-margin-top: 100px;
+        }
+        .content-block h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+        .content-block p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #050505;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--accent-code);
+            margin: 1rem 0;
+        }
+        .tags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .tag-card {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .tag-badge {
+            font-family: monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-code);
+            background-color: var(--accent-code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+        .tag-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        .tag-card code {
+            font-size: 0.82rem;
+            color: var(--text-primary);
+            background: #000;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            display: block;
+            overflow-x: auto;
+        }
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .select-custom {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="index.html">Knowledge Base</a> / 
+                <a href="prog.html">Programación</a> / 
+                HTML
+            </h1>
+            <nav class="nav-links">
+                <!-- Menú desplegable de categorías -->
+                <select id="jump-menu" onchange="navegarACategoria(this.value); this.value='';" class="select-custom">
+                    <option value="" disabled selected>📂 Ir a categoría...</option>
+                    <option value="seccion-1">1. Estructura base</option>
+                    <option value="seccion-2">2. Formato de texto y párrafos</option>
+                    <option value="seccion-3">3. Listas</option>
+                    <option value="seccion-4">4. Enlaces y multimedia</option>
+                    <option value="seccion-5">5. Tablas</option>
+                    <option value="seccion-6">6. Formularios e interactividad</option>
+                    <option value="seccion-7">7. Mapas de imagen y Frames</option>
+                    <option value="seccion-8">8. Nuevas etiquetas de HTML 4.0</option>
+                </select>
+
+                <a href="index.html">Inicio</a>
+                <a href="prog.html">Programación</a>
+                
+                <!-- Selector de temas -->
+                <select id="theme-selector" onchange="cambiarTema(this.value)" class="select-custom">
+                    <option value="default">✨ Base (Actual)</option>
+                    <option value="fallout">🟢 Fallout</option>
+                    <option value="cyberpunk">🟣 Cyberpunk</option>
+                </select>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <section class="hero">
+            <h2>Apuntes Completos de HTML</h2>
+            <p>Guía estructurada y exhaustiva sobre el lenguaje de marcado, organizada por categorías temáticas y normativas del estándar web.</p>
+        </section>
+
+        <!-- Bloque Introductorio Explicativo -->
+        <section class="intro-box">
+            <h3>¿Qué es HTML y para qué sirve?</h3>
+            <p>
+                <strong>HTML</strong> (<em>HyperText Markup Language</em> o Lenguaje de Marcado de Hipertexto) es el lenguaje de programación estándar utilizado para crear y estructurar páginas web. A través de un sistema de "etiquetas" (tags), le indica a los navegadores web (como Chrome, Firefox o Safari) cómo deben mostrar los textos, imágenes, videos y enlaces en la pantalla.
+            </p>
+            <p>
+                <strong>¿Para qué sirve?</strong> Su función principal es proporcionar la <strong>estructura y esqueleto</strong> de un sitio web. Mientras que CSS se encarga del diseño visual y estético, y JavaScript de la interactividad y la lógica, HTML define qué elementos existen en la página (párrafos, títulos, tablas, formularios) y cómo se relacionan entre sí jerárquicamente. Sin HTML, la web tal como la conocemos no podría existir.
+            </p>
+        </section>
+
+        <div class="content-stack">
+            
+            <!-- 1. Estructura base del documento -->
+            <article class="content-block" id="seccion-1">
+                <h3>1. Estructura base del documento</h3>
+                <p>Elementos fundamentales necesarios para inicializar cualquier archivo HTML e informar al navegador sobre su codificación y metadatos.</p>
+                
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Título&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Contenido --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;!DOCTYPE html&gt;</span>
+                        <p>Define el tipo de documento para HTML5.</p>
+                        <code>&lt;!DOCTYPE html&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;html&gt;</span>
+                        <p>Contenedor raíz de toda la página web.</p>
+                        <code>&lt;html lang="es"&gt;...&lt;/html&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;head&gt;</span>
+                        <p>Almacena metadatos invisibles, enlaces CSS y títulos.</p>
+                        <code>&lt;head&gt;...&lt;/head&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;title&gt;</span>
+                        <p>Establece el título de la pestaña del navegador.</p>
+                        <code>&lt;title&gt;Mi Web&lt;/title&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;body&gt;</span>
+                        <p>Agrupa todo el contenido visual y estructurado visible.</p>
+                        <code>&lt;body&gt;...&lt;/body&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;meta&gt;</span>
+                        <p>Proporciona metadatos estructurados (codificación, viewport).</p>
+                        <code>&lt;meta charset="UTF-8"&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. Formato de texto y párrafos -->
+            <article class="content-block" id="seccion-2">
+                <h3>2. Formato de texto y párrafos</h3>
+                <p>Etiquetas encargadas de estructurar bloques de texto, jerarquías de títulos y realces tipográficos de manera semántica.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;h1&gt; a &lt;h6&gt;</span>
+                        <p>Encabezados o títulos jerárquicos (del nivel 1 al 6).</p>
+                        <code>&lt;h1&gt;Título Principal&lt;/h1&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;p&gt;</span>
+                        <p>Define un bloque de párrafo de texto estándar.</p>
+                        <code>&lt;p&gt;Texto descriptivo.&lt;/p&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;br&gt;</span>
+                        <p>Inserta un salto de línea simple dentro del flujo.</p>
+                        <code>Linea 1&lt;br&gt;Linea 2</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;hr&gt;</span>
+                        <p>Genera una línea temática horizontal de separación.</p>
+                        <code>&lt;hr&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;strong&gt; / &lt;b&gt;</span>
+                        <p>Resalta texto con importancia fuerte (negrita).</p>
+                        <code>&lt;strong&gt;Importante&lt;/strong&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;em&gt; / &lt;i&gt;</span>
+                        <p>Enfatiza texto en cursiva o itálica.</p>
+                        <code>&lt;em&gt;Cursiva&lt;/em&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;sup&gt; y &lt;sub&gt;</span>
+                        <p>Superíndices y subíndices para fórmulas o notas.</p>
+                        <code>x&lt;sup&gt;2&lt;/sup&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;div&gt; y &lt;span&gt;</span>
+                        <p>Contenedores genéricos en bloque y en línea respectivamente.</p>
+                        <code>&lt;div&gt;Bloque&lt;/div&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. Listas -->
+            <article class="content-block" id="seccion-3">
+                <h3>3. Listas</h3>
+                <p>Estructuras orientadas a organizar colecciones de elementos de forma secuencial, desordenada o descriptiva.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;ul&gt;</span>
+                        <p>Crea una lista desordenada (con viñetas circulares).</p>
+                        <code>&lt;ul&gt;&lt;li&gt;Elemento&lt;/li&gt;&lt;/ul&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;ol&gt;</span>
+                        <p>Crea una lista ordenada numéricamente o por letras.</p>
+                        <code>&lt;ol&gt;&lt;li&gt;Paso 1&lt;/li&gt;&lt;/ol&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;li&gt;</span>
+                        <p>Representa un elemento individual dentro de listas (ul/ol).</p>
+                        <code>&lt;li&gt;Ítem de lista&lt;/li&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt;</span>
+                        <p>Lista de definición (término y su respectiva descripción).</p>
+                        <code>&lt;dt&gt;HTML&lt;/dt&gt;&lt;dd&gt;Lenguaje...&lt;/dd&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 4. Enlaces y elementos multimedia -->
+            <article class="content-block" id="seccion-4">
+                <h3>4. Enlaces y elementos multimedia</h3>
+                <p>Herramientas de hipertexto para conectar recursos externos/internos e incrustar contenido gráfico y audiovisual.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;a&gt;</span>
+                        <p>Etiqueta de hipervínculo para navegación interna o externa.</p>
+                        <code>&lt;a href="url"&gt;Enlace&lt;/a&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;img&gt;</span>
+                        <p>Inserta imágenes gráficas (PNG, JPG, SVG).</p>
+                        <code>&lt;img src="img.jpg" alt="Foto"&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;audio&gt;</span>
+                        <p>Reproductor nativo de archivos de audio integrados.</p>
+                        <code>&lt;audio src="audio.mp3" controls&gt;&lt;/audio&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;video&gt;</span>
+                        <p>Reproductor nativo e interactivo de secuencias de video.</p>
+                        <code>&lt;video src="vid.mp4" controls&gt;&lt;/video&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;embed&gt; / &lt;object&gt;</span>
+                        <p>Incrustan complementos, objetos externos o contenidos multimedia antiguos.</p>
+                        <code>&lt;embed src="file.swf"&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;bgsound&gt;</span>
+                        <p>Reproduce sonido de fondo automático (heredado de entornos legacy).</p>
+                        <code>&lt;bgsound src="audio.wav"&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 5. Tablas -->
+            <article class="content-block" id="seccion-5">
+                <h3>5. Tablas</h3>
+                <p>Estructuras tabulares organizadas en filas, columnas y celdas para representar datos estructurados.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;table&gt;</span>
+                        <p>Contenedor principal que engloba toda la estructura de la tabla.</p>
+                        <code>&lt;table&gt;...&lt;/table&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;tr&gt;</span>
+                        <p>Define una fila horizontal de celdas dentro de la tabla.</p>
+                        <code>&lt;tr&gt;&lt;td&gt;Fila&lt;/td&gt;&lt;/tr&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;td&gt;</span>
+                        <p>Celda estándar de datos tabulares.</p>
+                        <code>&lt;td&gt;Dato de celda&lt;/td&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;th&gt;</span>
+                        <p>Celda de cabecera (texto resaltado y centrado por defecto).</p>
+                        <code>&lt;th&gt;Encabezado&lt;/th&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;colgroup&gt; &lt;col&gt;</span>
+                        <p>Agrupa columnas para aplicarles estilos o formatos comunes.</p>
+                        <code>&lt;colgroup span="2"&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 6. Formularios e interactividad -->
+            <article class="content-block" id="seccion-6">
+                <h3>6. Formularios e interactividad</h3>
+                <p>Elementos orientados a la recolección de datos, interacción del usuario y envío de peticiones.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;form&gt;</span>
+                        <p>Contenedor principal del formulario interactivo.</p>
+                        <code>&lt;form action="envio.php"&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;input&gt;</span>
+                        <p>Campo multifuncional de entrada (texto, password, checkbox, radio).</p>
+                        <code>&lt;input type="text" name="usuario"&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;textarea&gt;</span>
+                        <p>Caja de texto multilínea para comentarios extensos.</p>
+                        <code>&lt;textarea rows="4"&gt;&lt;/textarea&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;select&gt; y &lt;option&gt;</span>
+                        <p>Crea menús desplegables con opciones seleccionables.</p>
+                        <code>&lt;select&gt;&lt;option&gt;Opción&lt;/option&gt;&lt;/select&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;button&gt;</span>
+                        <p>Botón interactivo accionable (envío, reseteo o propósito general).</p>
+                        <code>&lt;button type="submit"&gt;Enviar&lt;/button&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 7. Mapas de imagen y Marcos (Frames) -->
+            <article class="content-block" id="seccion-7">
+                <h3>7. Mapas de imagen y Marcos (Frames)</h3>
+                <p>Técnicas clásicas de partición de pantalla y zonas interactivas geométricas sobre imágenes.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;map&gt;</span>
+                        <p>Define un mapa de imagen interactivo asociado.</p>
+                        <code>&lt;map name="red"&gt;...&lt;/map&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;area&gt;</span>
+                        <p>Especifica las coordenadas geométricas (círculo, rectángulo, polígono) en un mapa.</p>
+                        <code>&lt;area shape="rect" coords="..."&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;frameset&gt;</span>
+                        <p>Estructura contenedora para dividir la ventana en filas o columnas de marcos.</p>
+                        <code>&lt;frameset cols="20%,*"&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;frame&gt;</span>
+                        <p>Define un marco individual independiente dentro de un frameset.</p>
+                        <code>&lt;frame src="pagina.html"&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 8. Nuevas etiquetas de HTML 4.0 -->
+            <article class="content-block" id="seccion-8">
+                <h3>8. Nuevas etiquetas de HTML 4.0</h3>
+                <p>Elementos introducidos para mejorar la semántica, control de formularios avanzados y accesibilidad.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;q&gt;</span>
+                        <p>Cita textual corta en línea.</p>
+                        <code>&lt;q&gt;Esto es una cita&lt;/q&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;acronym&gt;</span>
+                        <p>Define un acrónimo o abreviatura de texto.</p>
+                        <code>&lt;acronym title="..."&gt;HTML&lt;/acronym&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;ins&gt; y &lt;del&gt;</span>
+                        <p>Indican texto agregado o eliminado en revisiones de documentos.</p>
+                        <code>&lt;ins&gt;Nuevo texto&lt;/ins&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;fieldset&gt; y &lt;legend&gt;</span>
+                        <p>Agrupan lógicamente controles de un formulario bajo un marco con título.</p>
+                        <code>&lt;fieldset&gt;&lt;legend&gt;Datos&lt;/legend&gt;&lt;/fieldset&gt;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">&lt;label&gt;</span>
+                        <p>Etiqueta descriptiva vinculada formalmente a un control de formulario.</p>
+                        <code>&lt;label for="id"&gt;Nombre:&lt;/label&gt;</code>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 - Mi Base de Conocimiento</p>
+        </div>
+    </footer>
+</body>
+</html>

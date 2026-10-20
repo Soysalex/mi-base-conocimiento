@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS - Base de Conocimiento</title>
+    <script>
+        function cambiarTema(tema) {
+            document.documentElement.classList.remove('theme-fallout', 'theme-cyberpunk');
+            if (tema !== 'default') {
+                document.documentElement.classList.add('theme-' + tema);
+            }
+            localStorage.setItem('user-theme', tema);
+        }
+        function navegarACategoria(idSeccion) {
+            if (!idSeccion) return;
+            const elemento = document.getElementById(idSeccion);
+            if (elemento) {
+                elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        (function() {
+            const temaGuardado = localStorage.getItem('user-theme') || 'default';
+            if (temaGuardado !== 'default') {
+                document.documentElement.classList.add('theme-' + temaGuardado);
+            }
+            window.addEventListener('DOMContentLoaded', () => {
+                const selector = document.getElementById('theme-selector');
+                if (selector) selector.value = temaGuardado;
+            });
+        })();
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #121212;
+            --text-primary: #ededed;
+            --text-secondary: #a1a1a1;
+            --border-color: #222222;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --accent-code: #3b82f6;
+            --accent-code-bg: rgba(59, 130, 246, 0.08);
+        }
+        html.theme-fallout {
+            --bg-color: #050f05;
+            --card-bg: #0c1c0c;
+            --text-primary: #33ff33;
+            --text-secondary: #1ea746;
+            --border-color: #1b4d1b;
+            --accent-code: #10b981;
+            --accent-code-bg: rgba(16, 185, 129, 0.08);
+        }
+        html.theme-cyberpunk {
+            --bg-color: #080314;
+            --card-bg: #14082c;
+            --text-primary: #00f0ff;
+            --text-secondary: #c77dff;
+            --border-color: #ff007f;
+            --accent-code: #ff007f;
+            --accent-code-bg: rgba(255, 0, 127, 0.08);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .site-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+            background-color: rgba(10, 10, 10, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .logo a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .logo a:hover {
+            color: var(--text-primary);
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        .main-content {
+            flex: 1;
+            padding-top: 3.5rem;
+            padding-bottom: 5rem;
+        }
+        .hero {
+            margin-bottom: 3rem;
+        }
+        .hero h2 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.6rem;
+        }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+        .intro-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .intro-box h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+        }
+        .intro-box p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+        .content-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+        .content-block {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            scroll-margin-top: 100px;
+        }
+        .content-block h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+        .content-block p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #050505;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--accent-code);
+            margin: 1rem 0;
+        }
+        .tags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .tag-card {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .tag-badge {
+            font-family: monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-code);
+            background-color: var(--accent-code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+        .tag-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        .tag-card code {
+            font-size: 0.82rem;
+            color: var(--text-primary);
+            background: #000;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            display: block;
+            overflow-x: auto;
+        }
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .select-custom {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="index.html">Knowledge Base</a> / 
+                <a href="prog.html">Programación</a> / 
+                CSS
+            </h1>
+            <nav class="nav-links">
+                <!-- Menú desplegable de categorías de CSS -->
+                <select id="jump-menu" onchange="navegarACategoria(this.value); this.value='';" class="select-custom">
+                    <option value="" disabled selected>📂 Ir a categoría...</option>
+                    <option value="seccion-1">1. Sintaxis y Selectores</option>
+                    <option value="seccion-2">2. Modelo de Caja (Box Model)</option>
+                    <option value="seccion-3">3. Tipografía y Textos</option>
+                    <option value="seccion-4">4. Colores y Fondos</option>
+                    <option value="seccion-5">5. Posicionamiento y Layout</option>
+                    <option value="seccion-6">6. Flexbox</option>
+                    <option value="seccion-7">7. Grid Layout</option>
+                    <option value="seccion-8">8. Media Queries y Responsividad</option>
+                </select>
+
+                <a href="index.html">Inicio</a>
+                <a href="prog.html">Programación</a>
+                
+                <!-- Selector de temas -->
+                <select id="theme-selector" onchange="cambiarTema(this.value)" class="select-custom">
+                    <option value="default">✨ Base (Actual)</option>
+                    <option value="fallout">🟢 Fallout</option>
+                    <option value="cyberpunk">🟣 Cyberpunk</option>
+                </select>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <section class="hero">
+            <h2>Apuntes Completos de CSS</h2>
+            <p>Guía estructurada y exhaustiva sobre hojas de estilo en cascada, organizada por categorías temáticas y propiedades esenciales de diseño web.</p>
+        </section>
+
+        <!-- Bloque Introductorio Explicativo -->
+        <section class="intro-box">
+            <h3>¿Qué es CSS y para qué sirve?</h3>
+            <p>
+                <strong>CSS</strong> (<em>Cascading Style Sheets</em> u Hojas de Estilo en Cascada) es el lenguaje de diseño gráfico utilizado para definir y crear la presentación de un documento estructurado escrito en HTML. Mientras HTML construye el esqueleto, CSS se encarga de darle vida, color, estilo y adaptabilidad visual.
+            </p>
+            <p>
+                <strong>¿Para qué sirve?</strong> Permite controlar el diseño visual de múltiples páginas web a la vez, gestionar colores, tipografías, espaciados, animaciones y adaptar el contenido a diferentes tamaños de pantalla (dispositivos móviles, tablets y computadoras) mediante diseños responsivos.
+            </p>
+        </section>
+
+        <div class="content-stack">
+            
+            <!-- 1. Sintaxis y Selectores -->
+            <article class="content-block" id="seccion-1">
+                <h3>1. Sintaxis y Selectores</h3>
+                <p>La base para conectar las reglas de estilo con los elementos HTML específicos del documento mediante selectores de etiqueta, clase o ID.</p>
+                
+<pre>/* Estructura básica de una regla CSS */
+selector {
+    propiedad: valor;
+}</pre>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">Selector de Elemento</span>
+                        <p>Aplica estilos a todas las etiquetas HTML del tipo especificado.</p>
+                        <code>p { color: white; }</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">Selector de Clase (.)</span>
+                        <p>Aplica estilos a cualquier elemento que contenga el atributo class.</p>
+                        <code>.mi-clase { background: #000; }</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">Selector de ID (#)</span>
+                        <p>Aplica estilos a un elemento único e irrepetible en la página.</p>
+                        <code>#principal { width: 100%; }</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">Selector Descendiente</span>
+                        <p>Selecciona elementos que están dentro de otros contenedores.</p>
+                        <code>div p { font-size: 16px; }</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. Modelo de Caja (Box Model) -->
+            <article class="content-block" id="seccion-2">
+                <h3>2. Modelo de Caja (Box Model)</h3>
+                <p>Concepto fundamental que determina cómo se estructuran las dimensiones, márgenes y espacios de cada elemento en la interfaz.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">width / height</span>
+                        <p>Define el ancho y alto del contenido interno de la caja.</p>
+                        <code>width: 300px; height: 150px;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">padding</span>
+                        <p>Espacio de relleno interno situado entre el contenido y el borde.</p>
+                        <code>padding: 1rem 2rem;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">border</span>
+                        <p>Línea perimetral que delimita el borde exterior del relleno.</p>
+                        <code>border: 1px solid #222;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">margin</span>
+                        <p>Espacio de separación exterior que separa el elemento de otros.</p>
+                        <code>margin: 0 auto;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. Tipografía y Textos -->
+            <article class="content-block" id="seccion-3">
+                <h3>3. Tipografía y Textos</h3>
+                <p>Propiedades orientadas al diseño de fuentes, tamaños, pesos y alineación de los bloques textuales.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">font-family</span>
+                        <p>Establece la familia tipográfica o pila de fuentes del texto.</p>
+                        <code>font-family: sans-serif;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">font-size</span>
+                        <p>Define el tamaño de la fuente (px, rem, em, %).</p>
+                        <code>font-size: 1.1rem;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">font-weight</span>
+                        <p>Controla el grosor o peso de los caracteres tipográficos.</p>
+                        <code>font-weight: 600;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">text-align / line-height</span>
+                        <p>Alineación del texto y altura de línea para legibilidad.</p>
+                        <code>text-align: center; line-height: 1.6;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 4. Colores y Fondos -->
+            <article class="content-block" id="seccion-4">
+                <h3>4. Colores y Fondos</h3>
+                <p>Herramientas visuales para aplicar tonalidades a textos, fondos sólidos o imágenes decorativas.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">color</span>
+                        <p>Modifica el color del texto o elementos de primer plano.</p>
+                        <code>color: #ededed;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">background-color</span>
+                        <p>Establece el color de fondo de un contenedor.</p>
+                        <code>background-color: #121212;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">background-image</span>
+                        <p>Permite cargar imágenes como fondo de pantalla o contenedor.</p>
+                        <code>background-image: url('img.jpg');</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">opacity</span>
+                        <p>Controla el nivel de transparencia global de un elemento.</p>
+                        <code>opacity: 0.85;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 5. Posicionamiento y Layout -->
+            <article class="content-block" id="seccion-5">
+                <h3>5. Posicionamiento y Layout</h3>
+                <p>Propiedades para alterar el flujo normal de los elementos en el documento web.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">position: static / relative</span>
+                        <p>Flujo predeterminado o desplazamiento relativo a su posición original.</p>
+                        <code>position: relative; top: 10px;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">position: absolute</span>
+                        <p>Posiciona el elemento en relación a su contenedor padre más cercano.</p>
+                        <code>position: absolute; right: 0;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">position: fixed / sticky</span>
+                        <p>Fija elementos en la ventana del navegador al hacer scroll.</p>
+                        <code>position: sticky; top: 0;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">z-index</span>
+                        <p>Controla la profundidad y el orden de apilamiento en el eje Z.</p>
+                        <code>z-index: 10;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 6. Flexbox -->
+            <article class="content-block" id="seccion-6">
+                <h3>6. Flexbox</h3>
+                <p>Modelo de diseño unidimensional altamente eficiente para alinear y distribuir espacios entre elementos.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">display: flex</span>
+                        <p>Activa el contenedor flexible para sus elementos hijos.</p>
+                        <code>display: flex;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">justify-content</span>
+                        <p>Alinea los elementos horizontalmente (eje principal).</p>
+                        <code>justify-content: space-between;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">align-items</span>
+                        <p>Alinea los elementos verticalmente (eje transversal).</p>
+                        <code>align-items: center;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">flex-direction</span>
+                        <p>Define la dirección principal del flujo (row o column).</p>
+                        <code>flex-direction: column;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 7. Grid Layout -->
+            <article class="content-block" id="seccion-7">
+                <h3>7. Grid Layout</h3>
+                <p>Sistema de diseño bidimensional basado en filas y columnas para estructuras web complejas.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">display: grid</span>
+                        <p>Convierte al contenedor en una cuadrícula CSS.</p>
+                        <code>display: grid;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">grid-template-columns</span>
+                        <p>Define el número y tamaño de las columnas de la cuadrícula.</p>
+                        <code>grid-template-columns: repeat(3, 1fr);</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">gap</span>
+                        <p>Establece el espacio de separación entre celdas o elementos.</p>
+                        <code>gap: 1.5rem;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">grid-column</span>
+                        <p>Permite que un elemento ocupe múltiples columnas.</p>
+                        <code>grid-column: 1 / -1;</code>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 8. Media Queries y Responsividad -->
+            <article class="content-block" id="seccion-8">
+                <h3>8. Media Queries y Responsividad</h3>
+                <p>Técnicas esenciales para adaptar los diseños visuales según las características del dispositivo o pantalla.</p>
+
+                <div class="tags-grid">
+                    <div class="tag-card">
+                        <span class="tag-badge">@media screen</span>
+                        <p>Aplica reglas CSS específicas basadas en el ancho del viewport.</p>
+                        <code>@media (max-width: 768px) { ... }</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">max-width / min-width</span>
+                        <p>Puntos de interrupción (breakpoints) para resoluciones clave.</p>
+                        <code>min-width: 1024px;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">Units: rem, em, %</span>
+                        <p>Unidades relativas recomendadas para diseños adaptativos.</p>
+                        <code>font-size: 1rem; width: 100%;</code>
+                    </div>
+                    <div class="tag-card">
+                        <span class="tag-badge">clamp() / min() / max()</span>
+                        <p>Funciones matemáticas CSS para tipografías y tamaños fluidos.</p>
+                        <code>font-size: clamp(1rem, 2.5vw, 2rem);</code>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 - Mi Base de Conocimiento</p>
+        </div>
+    </footer>
+</body>
+</html>
