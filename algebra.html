@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álgebra - Base de Conocimiento</title>
+    <!-- Enlace al archivo CSS específico para álgebra -->
+    <link rel="stylesheet" href="algebra.css">
+    
+    <!-- LIBRERÍA MATHJAX: Encargada de renderizar las fórmulas matemáticas -->
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Cabecera corregida -->
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="index.html">Knowledge Base</a> / 
+                <a href="Matematicas.html">Matemáticas</a> / 
+                Álgebra
+            </h1>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="Matematicas.html">Matemáticas</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content container">
+        <section class="hero">
+            <h2>Apuntes de Álgebra</h2>
+            <p>Desliza hacia abajo para revisar cada regla explicada a detalle con sus fundamentos, ejemplos resueltos y ejercicios propuestos.</p>
+        </section>
+
+        <!-- Contenedor vertical de bloques de estudio -->
+        <div class="algebra-stack">
+            
+            <!-- Bloque 1 -->
+            <article class="algebra-block">
+                <div class="block-header">
+                    <span class="icon">🔣</span>
+                    <h3>1. Leyes de exponentes</h3>
+                </div>
+                <div class="block-body">
+                    <p>Las potencias son una forma abreviada de escribir multiplicaciones repetidas de un mismo número o variable. Las reglas de los exponentes nos permiten simplificar expresiones grandes sin tener que desarrollar cada multiplicación paso a paso.</p>
+                    <ul>
+                        <li>
+                            <strong>Multiplicación de bases iguales ($x^m \cdot x^n = x^{m+n}$):</strong> Cuando multiplicas dos potencias con la misma base, los exponentes se <em>suman</em>. Esto ocurre porque estás acumulando factores repetidos. Por ejemplo, $x^3 \cdot x^2$ se desglosa como $(x \cdot x \cdot x) \cdot (x \cdot x)$. Al juntarlos todos, tienes cinco $x$ multiplicándose, lo que da $x^5$.
+                        </li>
+                        <li>
+                            <strong>Potencia de una potencia ($(x^m)^n = x^{m \cdot n}$):</strong> Cuando una expresión con potencia se vuelve a elevar a otro exponente, los exponentes se <em>multiplican</em>. Por ejemplo, $(x^2)^3$ significa multiplicar tres veces el término $(x^2)$, es decir, $(x^2) \cdot (x^2) \cdot (x^2)$. Si expandes cada uno, obtienes seis $x$ multiplicándose ($x^6$).
+                        </li>
+                    </ul>
+
+                    <!-- Sección de Ejemplos -->
+                    <div class="examples-container">
+                        <h4>Ejemplos prácticos:</h4>
+                        
+                        <!-- Resuelto 1 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 1</span>
+                            <p>Simplificar: $(a^3 \cdot a^5) \div a^2$</p>
+                            <small><strong>Paso 1:</strong> Sumar exponentes arriba: $a^{3+5} = a^8$.<br>
+                            <strong>Paso 2:</strong> Restar exponente de abajo ($8 - 2 = 6$).<br>
+                            <strong>Resultado:</strong> $a^6$</small>
+                        </div>
+
+                        <!-- Resuelto 2 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 2</span>
+                            <p>Simplificar: $(2x^3)^2 \cdot x^4$</p>
+                            <small><strong>Paso 1:</strong> Aplicar potencia a coeficiente y variable: $2^2 \cdot (x^3)^2 = 4x^6$.<br>
+                            <strong>Paso 2:</strong> Multiplicar bases iguales sumando exponentes ($6 + 4 = 10$).<br>
+                            <strong>Resultado:</strong> $4x^{10}$</small>
+                        </div>
+
+                        <!-- Sin resolver 1 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 1 (Sin resolver)</span>
+                            <p>Simplifica la siguiente expresión aplicando leyes de exponentes:</p>
+                            <div class="math-example">$(b^4 \cdot b^{-2})^3$</div>
+                        </div>
+
+                        <!-- Sin resolver 2 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 2 (Sin resolver)</span>
+                            <p>Simplifica y reduce al mínimo:</p>
+                            <div class="math-example">$\frac{(y^3)^2 \cdot y^4}{y^5}$</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Bloque 2 -->
+            <article class="algebra-block">
+                <div class="block-header">
+                    <span class="icon">➕</span>
+                    <h3>2. Suma y resta de términos semejantes</h3>
+                </div>
+                <div class="block-body">
+                    <p>En álgebra, un término consta de un coeficiente (el número que va enfrente) y una parte literal (la variable con su exponente). La regla de oro es que <strong>solo se pueden sumar o restar términos estrictamente semejantes</strong>, es decir, aquellos que tienen exactamente la misma variable y el mismo exponente.</p>
+                    <ul>
+                        <li>
+                            <strong>El razonamiento detrás:</strong> Piensa en unidades de objetos. Si tienes 3 manzanas ($3x^2$) y le sumas 4 manzanas más ($4x^2$), tienes un total de 7 manzanas ($7x^2$). La "etiqueta" ($x^2$) no cambia porque solo estás contando cuántas unidades de ese mismo objeto tienes. Por el contrario, si intentas sumar $3x^2 + 2x$, estás mezclando magnitudes distintas, por lo que la operación no puede compactarse y debe dejarse tal cual.
+                        </li>
+                    </ul>
+
+                    <!-- Sección de Ejemplos -->
+                    <div class="examples-container">
+                        <h4>Ejemplos prácticos:</h4>
+                        
+                        <!-- Resuelto 1 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 1</span>
+                            <p>Reducir: $5x^2 - 3x + 2x^2 + 7x - 4$</p>
+                            <small><strong>Paso 1:</strong> Agrupar términos en $x^2$: $(5 + 2)x^2 = 7x^2$.<br>
+                            <strong>Paso 2:</strong> Agrupar términos en $x$: $(-3 + 7)x = 4x$.<br>
+                            <strong>Resultado:</strong> $7x^2 + 4x - 4$</small>
+                        </div>
+
+                        <!-- Resuelto 2 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 2</span>
+                            <p>Reducir: $4ab^2 - 2a^2b + 3ab^2 - a^2b$</p>
+                            <small><strong>Paso 1:</strong> Agrupar $ab^2$: $(4 + 3)ab^2 = 7ab^2$.<br>
+                            <strong>Paso 2:</strong> Agrupar $a^2b$: $(-2 - 1)a^2b = -3a^2b$.<br>
+                            <strong>Resultado:</strong> $7ab^2 - 3a^2b$</small>
+                        </div>
+
+                        <!-- Sin resolver 1 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 1 (Sin resolver)</span>
+                            <p>Reduce los términos semejantes en la siguiente expresión:</p>
+                            <div class="math-example">$6m^3 - 4m^2 + 2m^3 - 5m^2 + 3m$</div>
+                        </div>
+
+                        <!-- Sin resolver 2 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 2 (Sin resolver)</span>
+                            <p>Agrupa y simplifica al máximo:</p>
+                            <div class="math-example">$8xy - 3x^2y + 2xy + 5x^2y - 4xy^2$</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Bloque 3 -->
+            <article class="algebra-block">
+                <div class="block-header">
+                    <span class="icon">📐</span>
+                    <h3>3. Radicales a exponentes fraccionarios</h3>
+                </div>
+                <div class="block-body">
+                    <p>Las raíces y los exponentes fraccionarios son dos formas diferentes de escribir exactamente la misma operación matemática. La regla general es $\sqrt[n]{x^m} = x^{\frac{m}{n}}$.</p>
+                    <ul>
+                        <li>
+                            <strong>El significado de la fracción:</strong> El número de arriba (numerador, $m$) representa la potencia normal a la que está elevada la variable. El número de abajo (denominador, $n$) representa el índice de la raíz, es decir, la operación inversa que busca qué número multiplicado por sí mismo esa cantidad de veces genera el valor original. Por eso una raíz cuadrada ($\sqrt{x}$) se escribe como $x^{\frac{1}{2}}$, porque busca la base que al multiplicarse por sí misma dos veces da $x$.
+                        </li>
+                    </ul>
+
+                    <!-- Sección de Ejemplos -->
+                    <div class="examples-container">
+                        <h4>Ejemplos prácticos:</h4>
+                        
+                        <!-- Resuelto 1 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 1</span>
+                            <p>Convertir a exponente fraccionario: $\sqrt[5]{x^3}$</p>
+                            <small><strong>Paso 1:</strong> El exponente interno ($3$) pasa al numerador.<br>
+                            <strong>Paso 2:</strong> El índice de la raíz ($5$) pasa al denominador.<br>
+                            <strong>Resultado:</strong> $x^{\frac{3}{5}}$</small>
+                        </div>
+
+                        <!-- Resuelto 2 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 2</span>
+                            <p>Convertir y simplificar: $\sqrt[4]{y^6}$</p>
+                            <small><strong>Paso 1:</strong> Expresar como fracción: $y^{\frac{6}{4}}$.<br>
+                            <strong>Paso 2:</strong> Simplificar la fracción $\frac{6}{4}$ a $\frac{3}{2}$.<br>
+                            <strong>Resultado:</strong> $y^{\frac{3}{2}}$</small>
+                        </div>
+
+                        <!-- Sin resolver 1 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 1 (Sin resolver)</span>
+                            <p>Transforma el radical a una potencia con exponente fraccionario:</p>
+                            <div class="math-example">$\sqrt[7]{a^4}$</div>
+                        </div>
+
+                        <!-- Sin resolver 2 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 2 (Sin resolver)</span>
+                            <p>Convierte y reduce la siguiente expresión radical:</p>
+                            <div class="math-example">$\sqrt[3]{b^9}$</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Bloque 4 -->
+            <article class="algebra-block">
+                <div class="block-header">
+                    <span class="icon">🧮</span>
+                    <h3>4. Propiedad distributiva</h3>
+                </div>
+                <div class="block-body">
+                    <p>La propiedad distributiva rige cómo interactúa una multiplicación con una suma o resta dentro de un paréntesis, expresada como $a \cdot (b + c) = a \cdot b + a \cdot c$.</p>
+                    <ul>
+                        <li>
+                            <strong>Por qué es crucial:</strong> El término que está afuera del paréntesis actúa como un factor común para todo lo que está adentro. Cada componente individual dentro del paréntesis debe recibir su propia multiplicación por ese término externo, aplicando de forma independiente las reglas de coeficientes y exponentes que correspondan en cada caso.
+                        </li>
+                    </ul>
+
+                    <!-- Sección de Ejemplos -->
+                    <div class="examples-container">
+                        <h4>Ejemplos prácticos:</h4>
+                        
+                        <!-- Resuelto 1 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 1</span>
+                            <p>Desarrollar: $2x^2(3x - 5)$</p>
+                            <small><strong>Paso 1:</strong> Multiplicar $2x^2$ por $3x \rightarrow 6x^3$.<br>
+                            <strong>Paso 2:</strong> Multiplicar $2x^2$ por $-5 \rightarrow -10x^2$.<br>
+                            <strong>Resultado:</strong> $6x^3 - 10x^2$</small>
+                        </div>
+
+                        <!-- Resuelto 2 -->
+                        <div class="example-card solved">
+                            <span class="badge resuelto">Resuelto 2</span>
+                            <p>Desarrollar: $-4a(a^2 - 2a + 3)$</p>
+                            <small><strong>Paso 1:</strong> $-4a \cdot a^2 = -4a^3$.<br>
+                            <strong>Paso 2:</strong> $-4a \cdot (-2a) = 8a^2$.<br>
+                            <strong>Paso 3:</strong> $-4a \cdot 3 = -12a$.<br>
+                            <strong>Resultado:</strong> $-4a^3 + 8a^2 - 12a$</small>
+                        </div>
+
+                        <!-- Sin resolver 1 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 1 (Sin resolver)</span>
+                            <p>Aplica la propiedad distributiva para eliminar los paréntesis:</p>
+                            <div class="math-example">$5m(m^2 - 3m + 4)$</div>
+                        </div>
+
+                        <!-- Sin resolver 2 -->
+                        <div class="example-card unsolved">
+                            <span class="badge propuesto">Propuesto 2 (Sin resolver)</span>
+                            <p>Resuelve la siguiente multiplicación distributiva:</p>
+                            <div class="math-example">$-2x^2(4x^3 - 2x + 7)$</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 - Mi Base de Conocimiento</p>
+        </div>
+    </footer>
+</body>
+</html>
