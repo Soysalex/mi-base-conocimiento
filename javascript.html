@@ -251,6 +251,19 @@
             font-size: 0.85rem;
             cursor: pointer;
         }
+        .btn-ejemplo {
+            background-color: var(--accent-code);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .btn-ejemplo:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -275,6 +288,7 @@
                     <option value="seccion-8">8. Eventos y Asincronía básica</option>
                 </select>
 
+                <a href="JsE.html" class="btn-ejemplo">✨ Mostrar Ejemplo</a>
                 <a href="index.html">Inicio</a>
                 <a href="prog.html">Programación</a>
                 
@@ -422,7 +436,7 @@ var antiguo = "Evitar usar var";</pre>
                     </div>
                     <div class="tag-card">
                         <span class="tag-badge">filter()</span>
-                        <p>F filtra elementos que cumplan una condición específica.</p>
+                        <p>Filtra elementos que cumplan una condición específica.</p>
                         <code>let altos = pers.filter(p => p.edad > 18);</code>
                     </div>
                 </div>
@@ -509,48 +523,4 @@ var antiguo = "Evitar usar var";</pre>
                     </div>
                     <div class="tag-card">
                         <span class="tag-badge">createElement</span>
-                        <p>Crea nuevos elementos HTML de manera dinámica desde JavaScript.</p>
-                        <code>let div = document.createElement("div");</code>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 8. Eventos y Asincronía básica -->
-            <article class="content-block" id="seccion-8">
-                <h3>8. Eventos y Asincronía básica</h3>
-                <p>Gestión de acciones del usuario en tiempo real y manejo de operaciones que toman tiempo en completarse.</p>
-
-                <div class="tags-grid">
-                    <div class="tag-card">
-                        <span class="tag-badge">addEventListener</span>
-                        <p>Escucha acciones del usuario como clics, envíos o movimientos.</p>
-                        <code>btn.addEventListener("click", () => {});</code>
-                    </div>
-                    <div class="tag-card">
-                        <span class="tag-badge">setTimeout</span>
-                        <p>Ejecuta una función después de un retraso de tiempo determinado.</p>
-                        <code>setTimeout(() => { alert("Hola"); }, 2000);</code>
-                    </div>
-                    <div class="tag-card">
-                        <span class="tag-badge">Promesas (Promises)</span>
-                        <p>Objetos que representan la finalización o fallo de una operación asíncrona.</p>
-                        <code>const promesa = new Promise((res, rej) => {});</code>
-                    </div>
-                    <div class="tag-card">
-                        <span class="tag-badge">Async / Await</span>
-                        <p>Sintaxis limpia y moderna para manejar código asíncrono secuencialmente.</p>
-                        <code>async function datos() { await fetch(...); }</code>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 - Mi Base de Conocimiento</p>
-        </div>
-    </footer>
-</body>
-</html>
+                        <p>Crea nuevos elementos HTML de manera dinámica desde JavaScript.</p
