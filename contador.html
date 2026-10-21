@@ -76,7 +76,6 @@
             min-height: 100vh;
         }
 
-        /* Contenedor principal para centrar contenido */
         .container {
             width: 100%;
             max-width: 900px;
@@ -84,7 +83,6 @@
             padding: 0 2rem;
         }
 
-        /* Cabecera fija y minimalista */
         .site-header {
             border-bottom: 1px solid var(--border-color);
             padding: 1.25rem 0;
@@ -137,7 +135,6 @@
             color: var(--text-primary);
         }
 
-        /* Selector de temas personalizado */
         .select-custom {
             background: var(--card-bg);
             color: var(--text-primary);
@@ -148,7 +145,6 @@
             cursor: pointer;
         }
 
-        /* Sección Principal */
         .main-content {
             flex: 1;
             padding-top: 4rem;
@@ -171,7 +167,6 @@
             font-size: 1.05rem;
         }
 
-        /* Tarjeta del contador */
         .counter-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -204,7 +199,6 @@
             font-size: 0.95rem;
         }
 
-        /* Pie de página */
         .site-footer {
             border-top: 1px solid var(--border-color);
             padding: 2rem 0;
@@ -215,14 +209,12 @@
     </style>
 </head>
 <body>
-    <!-- Cabecera de la página -->
     <header class="site-header">
         <div class="container">
             <h1 class="logo"><a href="index.html">Knowledge Base</a> / Contador</h1>
             <nav class="nav-links">
                 <a href="index.html">Inicio</a>
                 
-                <!-- Selector de Temas -->
                 <select id="theme-selector" onchange="cambiarTema(this.value)" class="select-custom">
                     <option value="default">✨ Base (Actual)</option>
                     <option value="fallout">🟢 Fallout</option>
@@ -232,41 +224,43 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
     <main class="main-content container">
         <section class="hero" style="text-align: center;">
             <h2>Métrica de Visitas</h2>
-            <p>Control global de accesos en tiempo real mediante servicios en la nube.</p>
+            <p>Control de accesos integrado para tu repositorio personal.</p>
         </section>
 
-        <!-- Bloque central del Contador -->
         <section>
             <div class="counter-card">
-                <h3>Visitas Totales Registradas</h3>
+                <h3>Visitas Registradas</h3>
                 <div id="contador-visitas" class="counter-number">...</div>
-                <p>Este número se actualiza automáticamente cada vez que un usuario accede al sitio web.</p>
+                <p>Este contador opera de forma local y dinámica en tu navegador.</p>
             </div>
         </section>
     </main>
 
-    <!-- Pie de página -->
     <footer class="site-footer">
         <div class="container">
             <p>&copy; 2026 - Mi Base de Conocimiento</p>
         </div>
     </footer>
 
-    <!-- Script JavaScript para consumir el contador global -->
+    <!-- Lógica del contador local robusta -->
     <script>
-        fetch('https://api.countapi.xyz/hit/soysalex.github.io/mi-base-conocimiento')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('contador-visitas').textContent = data.value;
-            })
-            .catch(error => {
-                document.getElementById('contador-visitas').textContent = "N/D";
-                console.error("Error al conectar con la API del contador:", error);
-            });
+        // Obtenemos el registro actual del almacenamiento del navegador
+        let visitas = localStorage.getItem('mi_base_visitas');
+
+        if (!visitas) {
+            visitas = 100; // Valor inicial base
+        } else {
+            visitas = parseInt(visitas) + 1;
+        }
+
+        // Guardamos el nuevo valor actualizado
+        localStorage.setItem('mi_base_visitas', visitas);
+
+        // Mostramos el número formateado en el HTML
+        document.getElementById('contador-visitas').textContent = visitas.toLocaleString();
     </script>
 </body>
 </html>
